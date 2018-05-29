@@ -1,0 +1,12 @@
+{
+    "workbench.colorTheme": "Darcula",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80
+    ],
+    "files.autoSave": "onWindowChange",
+    "editor.fontFamily": "'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 13,
+    "terminal.external.osxExec": "iTerm.app",
+    "prettier.singleQuote": true
+}
