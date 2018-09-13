@@ -1,3 +1,12 @@
+# TODO
+
+Create script which will configure:
+
+- git
+- ssh key
+- zsh
+- oh-my-zsh 
+
 ## vscode extensions
 
 - theme-onedark
