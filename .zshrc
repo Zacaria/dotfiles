@@ -51,7 +51,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bower sublime brew history node npm sudo web-search z)
+plugins=(git history node npm sudo z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,9 +81,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="nano ~/.zshrc"
+alias zshconfig="vi ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias fuck="eval $(thefuck --alias)"
 alias grb="git pull --rebase"
 
 fortune | cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows/*.cow | gshuf -n1)
+
+DEFAULT_USER=$USER
