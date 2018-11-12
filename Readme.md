@@ -24,3 +24,5 @@ Create script which will configure:
 - fileutils
 - import-cost
 - local-history
+- change-case
+- js-console-utils
