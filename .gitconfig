@@ -3,21 +3,6 @@
 	email = z@havesomecode.io
 [push]
 	default = simple
-
-[alias]
-	tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	dump = cat-file -p
-[color]
-	ui = true
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vi

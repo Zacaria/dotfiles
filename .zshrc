@@ -98,5 +98,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshconfig="vim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
+alias zshreload="exec zsh"
 alias grb="git pull --rebase"
+alias ls="ls -lairth"
+
+DEFAULT_USER="$USER"

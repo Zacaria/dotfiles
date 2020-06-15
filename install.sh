@@ -9,6 +9,9 @@ fi
 echo "Installing Brew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+# install git
+brew install git
+
 # Zsh
 
 brew install zsh
@@ -25,7 +28,7 @@ chmod 755 /usr/local/share/zsh/site-functions
 ## Theme powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
-source ~/.zshrc
+exec zsh
 
 p10k configure
 
@@ -34,6 +37,9 @@ p10k configure
 git config --global user.name Zacaria
 git config --global user.email "$EMAIL"
 git config --global push.default simple
+git config --global core.editor vim
+cp .gitignore_global ~
+git config --global core.excludefile ~/.gitignore_global
 
 # Setup node
 echo "Installing node"
@@ -43,3 +49,10 @@ n lts
 
 # Install yarn
 curl -o- -L https://yarnpkg.com/install.sh | bash
+
+# Install powerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts

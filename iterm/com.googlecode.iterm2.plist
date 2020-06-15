@@ -74,7 +74,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>714 648 620 392 0 0 2048 1257 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1444 698 570 452 0 0 2048 1257 </string>
+	<string>0 0 2048 1257 0 0 2048 1257 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1384 599 570 452 0 0 2048 1257 </string>
 	<key>New Bookmarks</key>
@@ -102,13 +102,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.16300037503242493</real>
+				<real>0.091867863899096847</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.23660069704055786</real>
+				<real>0.20178449023649808</real>
 				<key>Red Component</key>
-				<real>0.7074432373046875</real>
+				<real>0.9049530029296875</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
@@ -724,6 +724,8 @@
 				<key>Red Component</key>
 				<real>0.19802422821521759</real>
 			</dict>
+			<key>Minimum Contrast</key>
+			<real>0.23794833096590917</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1044,7 +1046,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.089229060913705582</real>
+			<real>0.037690355329949243</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -1079,7 +1081,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>23824431-DE11-4045-8458-A2876D2D91E3</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>11</integer>
+	<integer>12</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1842,7 +1844,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-14T09:20:33Z</date>
+	<date>2020-06-15T10:44:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUSkippedVersion</key>
@@ -1858,7 +1860,7 @@
 	<key>iTerm Version</key>
 	<string>3.3.9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
 	<false/>
 </dict>
