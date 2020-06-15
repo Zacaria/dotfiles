@@ -7,6 +7,10 @@
     "files.autoSave": "onWindowChange",
     "editor.fontFamily": "'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 13,
+    "prettier.singleQuote": true,
+    "terminal.external.linuxExec": "/bin/zsh",
+    "terminal.integrated.lineHeight": 1.3,
+    "terminal.integrated.fontFamily": "\"MesloLGS NF\"",
+    "terminal.integrated.rendererType": "canvas",
     "terminal.external.osxExec": "iTerm.app",
-    "prettier.singleQuote": true
 }
