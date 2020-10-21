@@ -102,4 +102,12 @@ alias zshreload="exec zsh"
 alias grb="git pull --rebase"
 alias ls="ls -lairth"
 
+# Load .nvmrc version in local directory
+file=".nvmrc"
+if [ -f "$file" ]
+then
+echo "$file found."
+n auto
+fi
+
 DEFAULT_USER="$USER"
