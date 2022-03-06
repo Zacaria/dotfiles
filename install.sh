@@ -44,8 +44,9 @@ git config --global core.excludefile ~/.gitignore_global
 # Setup node
 echo "Installing node"
 
-brew install n
-n lts
+curl -L https://git.io/n-install | bash -s -- -y
+exec zsh
+node -v
 
 # make cache folder (if missing) and take ownership
 sudo mkdir -p /usr/local/n
