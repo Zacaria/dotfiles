@@ -62,3 +62,9 @@ cd fonts
 ./install.sh
 cd ..
 rm -rf fonts
+
+# Configure screenshots location
+mkdir ~/Screenshots
+defaults write com.apple.screencapture location ~/Screenshots
+killall SystemUIServer
+
