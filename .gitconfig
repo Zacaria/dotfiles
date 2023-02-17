@@ -1,8 +1,11 @@
 [user]
 	name = Zacaria
-	email = z@havesomecode.io
+	email = 
 [push]
 	default = simple
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = vi
+	editor = vim
+	excludefile = /Users/zacariachtatar/.gitignore_global
+[init]
+	defaultBranch = main
