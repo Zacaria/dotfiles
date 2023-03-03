@@ -26,3 +26,5 @@ Create script which will configure:
 - local-history
 - change-case
 - js-console-utils
+
+https://madmalik.github.io/mononoki/
