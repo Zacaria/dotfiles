@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +15,7 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,6 +108,7 @@ alias zshconfig="vim ~/.zshrc"
 alias zshreload="exec zsh"
 alias grb="git pull --rebase"
 alias ls="ls -lairth"
+alias dcp="docker-compose"
 
 # Load .nvmrc version in local directory
 file=".nvmrc"
@@ -111,3 +119,41 @@ n auto
 fi
 
 DEFAULT_USER="$USER"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/zacariachtatar/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# bun completions
+[ -s "/Users/zacariachtatar/.bun/_bun" ] && source "/Users/zacariachtatar/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+alias vim=nvim
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/Users/zacariachtatar/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
+
+# Added by Windsurf
+export PATH="/Users/zacariachtatar/.codeium/windsurf/bin:$PATH"
+
+. "$HOME/.local/bin/env"
+
+eval "$(starship init zsh)"
