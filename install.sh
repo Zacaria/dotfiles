@@ -25,12 +25,19 @@ cp .zshrc ~
 chmod 755 /usr/local/share/zsh
 chmod 755 /usr/local/share/zsh/site-functions
 
-## Theme powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+# ## Theme powerlevel10k
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
-exec zsh
+# exec zsh
 
-p10k configure
+# p10k configure
+
+# Install Starship
+curl -sS https://starship.rs/install.sh | sh
+
+echo "eval \"\$(starship init zsh)\"" >> ~/.zshrc
+
+mkdir -p ~/.config && cp starship.toml ~/.config/starship.toml
 
 # Configure git
 
@@ -63,3 +70,5 @@ mkdir ~/Screenshots
 defaults write com.apple.screencapture location ~/Screenshots
 killall SystemUIServer
 
+# Install uv for python
+curl -LsSf https://astral.sh/uv/install.sh | sh
