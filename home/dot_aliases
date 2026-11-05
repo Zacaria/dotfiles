@@ -1,0 +1,5 @@
+alias zshconfig="zed ~/.zshrc"
+alias zshreload="exec zsh -l"
+alias grb="git pull --rebase"
+alias ls="ls -lairth"
+alias dcp="docker compose"

@@ -1,0 +1,68 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Runtime and agent versions: {{ include "dot_config/mise/config.toml" | sha256sum }}
+source_dir={{ .chezmoi.sourceDir | shellQuote }}
+repo_dir={{ .chezmoi.workingTree | shellQuote }}
+# Hook trust helper: {{ include "../scripts/trust-codex-rtk.mjs" | sha256sum }}
+context_version={{ .contextModeVersion | shellQuote }}
+brew_bin="$(command -v brew || true)"
+if [[ -z "$brew_bin" ]]; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$candidate" ]]; then
+      brew_bin="$candidate"
+      break
+    fi
+  done
+fi
+if [[ -z "$brew_bin" ]]; then
+  printf '%s\n' 'Homebrew is required to configure the agents.' >&2
+  exit 1
+fi
+brew_prefix="$("$brew_bin" --prefix)"
+export PATH="$brew_prefix/bin:$HOME/.local/bin:$PATH"
+mise_bin="$brew_prefix/bin/mise"
+rtk_bin="$brew_prefix/bin/rtk"
+codex_bin="$brew_prefix/bin/codex"
+eval "$(MISE_GLOBAL_CONFIG_FILE="$source_dir/dot_config/mise/config.toml" "$mise_bin" env -s bash)"
+
+# A stable prefix survives Node patch upgrades. Respect the user's npm policy.
+context_root="$HOME/.local/lib/node_modules/context-mode"
+installed=""
+if [[ -f "$context_root/package.json" ]]; then
+  installed="$(node -p 'require(process.argv[1]).version' "$context_root/package.json")"
+fi
+if [[ "$installed" != "$context_version" ]]; then
+  npm install --global --prefix "$HOME/.local" "context-mode@$context_version"
+fi
+context_cli="$context_root/cli.mjs"
+
+"$codex_bin" plugin marketplace add mksglu/context-mode
+"$codex_bin" plugin add context-mode@context-mode
+
+# Codex's unfiltered remote catalog can exceed setup's plugin-list buffer.
+# Restrict only discovery; delegate every other command to the installed CLI.
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+cat >"$tmpdir/codex" <<'CODEX'
+#!/bin/sh
+if [ "$#" -eq 2 ] && [ "$1" = plugin ] && [ "$2" = list ]; then
+  exec "$DOTFILES_CODEX_BIN" plugin list --marketplace context-mode
+fi
+exec "$DOTFILES_CODEX_BIN" "$@"
+CODEX
+chmod +x "$tmpdir/codex"
+DOTFILES_CODEX_BIN="$codex_bin" PATH="$tmpdir:$PATH" node "$context_cli" setup --agents codex --yes
+
+# OMP accepts Pi-compatible plugins; use the exact installed package locally.
+omp plugin install "$context_root"
+rtk_help="$("$rtk_bin" init --help)"
+if [[ "$rtk_help" != *'- omp:'* ]]; then
+  "$brew_bin" upgrade rtk
+fi
+"$rtk_bin" init --global --codex
+node "$repo_dir/scripts/trust-codex-rtk.mjs" "$codex_bin"
+"$rtk_bin" init --global --agent omp --auto-patch --no-trust-filters
+omp plugin doctor
+{{ end -}}
