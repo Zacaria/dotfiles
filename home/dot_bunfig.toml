@@ -1,0 +1,3 @@
+[install]
+# Seven days, in seconds. Keep exceptions explicit and temporary.
+minimumReleaseAge = 604800

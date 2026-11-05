@@ -1,0 +1,3 @@
+# Wait seven days before accepting newly published package versions.
+min-release-age=7
+save-exact=true

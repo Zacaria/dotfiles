@@ -1,0 +1,17 @@
+# Global defaults. Project configuration takes precedence.
+[tools]
+node = "24"
+bun = "1.4.4"
+java = "zulu-17.58.21.0"
+go = "1.25.4"
+rust = "1.91.1"
+julia = "1.12.6"
+"github:can1357/oh-my-pi" = "18.16.0"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "java", "rust"]
+idiomatic_version_file_disable_files = ["node:package.json"]
+
+# uv owns the unversioned Python executables, including on migrated machines.
+[settings.shims]
+exclude = ["python", "python3"]

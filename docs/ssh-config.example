@@ -1,0 +1,7 @@
+# Copy selected entries into ~/.ssh/config, then replace the placeholders.
+# Keep real hosts, usernames, key paths and tunnel definitions outside Git.
+Host example-work
+    HostName host.example.com
+    User your-user
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes

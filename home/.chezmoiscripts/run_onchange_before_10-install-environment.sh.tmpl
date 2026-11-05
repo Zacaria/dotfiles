@@ -1,0 +1,50 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Brewfile: {{ include "dot_Brewfile" | sha256sum }}
+# Runtime versions: {{ include "dot_config/mise/config.toml" | sha256sum }}
+# Python version: {{ include "dot_config/uv/dot_python-version" | sha256sum }}
+source_dir={{ .chezmoi.sourceDir | shellQuote }}
+brew_bin="$(command -v brew || true)"
+if [[ -z "$brew_bin" ]]; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$candidate" ]]; then
+      brew_bin="$candidate"
+      break
+    fi
+  done
+fi
+if [[ -z "$brew_bin" ]]; then
+  printf '%s\n' 'Install Homebrew from https://brew.sh, then run chezmoi apply again.' >&2
+  exit 1
+fi
+# Keep existing manually installed applications; a fresh Mac gets the casks.
+for app_cask in zed ghostty; do
+  case "$app_cask" in
+    zed) app_name=Zed ;;
+    ghostty) app_name=Ghostty ;;
+  esac
+  if [[ -d "/Applications/$app_name.app" ]] && ! "$brew_bin" list --cask "$app_cask" >/dev/null 2>&1; then
+    HOMEBREW_BUNDLE_CASK_SKIP="$(printenv HOMEBREW_BUNDLE_CASK_SKIP || true) $app_cask"
+    export HOMEBREW_BUNDLE_CASK_SKIP
+  fi
+done
+"$brew_bin" bundle install --file "$source_dir/dot_Brewfile" --no-upgrade
+# A manually installed Zed may not have installed its command-line launcher.
+if ! command -v zed >/dev/null 2>&1 && [[ -x /Applications/Zed.app/Contents/MacOS/cli ]]; then
+  mkdir -p "$HOME/.local/bin"
+  if [[ ! -e "$HOME/.local/bin/zed" && ! -L "$HOME/.local/bin/zed" ]]; then
+    ln -s /Applications/Zed.app/Contents/MacOS/cli "$HOME/.local/bin/zed"
+  fi
+fi
+mise_bin="$("$brew_bin" --prefix)/bin/mise"
+MISE_GLOBAL_CONFIG_FILE="$source_dir/dot_config/mise/config.toml" "$mise_bin" install --cd "$source_dir"
+uv_bin="$("$brew_bin" --prefix)/bin/uv"
+uv_help="$("$uv_bin" python install --help)"
+if [[ "$uv_help" != *'--default'* ]]; then
+  "$brew_bin" upgrade uv
+fi
+python_version="$(tr -d '[:space:]' <"$source_dir/dot_config/uv/dot_python-version")"
+"$uv_bin" python install "$python_version" --default
+{{ end -}}

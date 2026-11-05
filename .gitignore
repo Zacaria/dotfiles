@@ -1,0 +1,17 @@
+.DS_Store
+.history/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.gitconfig.local
+.zshrc.local
+.zprofile.local
+mise.local.toml
+home/dot_gitconfig.local
+home/private_dot_gitconfig.local
+home/dot_zshrc.local
+home/private_dot_zshrc.local
+home/dot_zprofile.local
+home/private_dot_zprofile.local

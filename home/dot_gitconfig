@@ -1,0 +1,11 @@
+[user]
+	useConfigOnly = true
+[push]
+	default = simple
+[core]
+	excludesFile = ~/.gitignore_global
+	editor = zed --wait
+[init]
+	defaultBranch = main
+[include]
+	path = ~/.gitconfig.local
